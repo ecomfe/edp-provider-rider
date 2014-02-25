@@ -12,8 +12,5 @@
         "autoprefixer": "~1.1"
     },
     "main": "index.js",
-    "scripts": {
-        "test": "node test/test.js"
-    },
     "repository": "git://github.com/ecomfe/edp-provider-rider"
 }

@@ -14,7 +14,7 @@ var ap = require('autoprefixer');
  */
 function prefixer(args, callback) {
 
-    return function(err, css) {
+    return function (err, css) {
 
         if (err) {
             callback(err);
@@ -28,22 +28,31 @@ function prefixer(args, callback) {
 
 /**
  * 编译
- * @param  {string}   str      css str
  * @param  {Object}   options  options
  * @param  {Function} callback provider callback
  */
-function compile(str, options, callback ) {
+function plugin(options) { 
 
-    stylus(str)
-        .set('filename', options.filename)
-        .set('compress', options.compress)
-        .set('paths', options.paths)
-        .use(rider({
+    return function (stylus) {
+
+        stylus.use(rider({
             implicit: options.implicit
         }))
-        .on('end', prefixer(options.autoprefixer, callback))
-        .render(callback);
+        .on('end', prefixer(options.autoprefixer, callback));
+
+        if (options.plugin) {
+
+            stylus.use(plugin);
+
+        }
+
+    };
 
 }
 
-module.exports = exports = compile;
+module.exports = exports = {
+    stylus: stylus,
+    rider: rider,
+    autoprefixer: ap,
+    provider: plugin
+};
