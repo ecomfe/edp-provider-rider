@@ -8,9 +8,12 @@
 
     "dependencies": {
         "stylus": "~0.42.2",
-        "rider": "~0.0.1",
+        "rider": "~0.1.1",
         "autoprefixer": "~1.1"
     },
     "main": "index.js",
+    "scripts": {
+        "test": "node test/test.js"
+    },
     "repository": "git://github.com/ecomfe/edp-provider-rider"
 }

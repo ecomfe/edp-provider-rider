@@ -3,24 +3,32 @@
  */
 
 var fs = require('fs');
+var path = require('path');
 var complie = require('../index');
 
-var fname = 'layout';
-var input = fname + '.styl';
-var output = fname + '.css';
+var fname = 'index';
+var input = path.resolve(__dirname, fname + '.styl');
+var output = path.resolve(__dirname, fname + '.css');
+var content = fs.readFileSync(input).toString('utf-8');
+
+console.log('[complie]', input);
 
 complie(
-	fs.readFileSync(input), 
-	{
-		pathname: __dirname,
-		importRider: true,
-		autoprefixer: ["android >= 2.3", "ios >= 5"],
-	}, 
-	function (err, css) {
-	if (err) {
-
-	}
-	else {
-		fs.writeFileSync(output, css);
-	}
-});
+    content, 
+    {
+        filename: input,
+        paths: [ __dirname ],
+        implicit: true,
+        autoprefixer: ['android >= 2.3', 'ios >= 5'],
+        compress: true
+    }, 
+    function (err, css) {
+        if (err) {
+            console.log('[err]', err);
+        }
+        else {
+            console.log('[ok]', output);
+            fs.writeFileSync(output, css);
+        }
+    }
+);
