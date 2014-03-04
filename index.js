@@ -20,7 +20,10 @@ function prefixer(args, callback) {
             callback(err);
         }
 
-        return ap.apply(this, args).process(css).css;
+        return ap.apply(
+            this, 
+            args || [ "android >= 2.3", "ios >= 5", "ie >= 10" ]
+            ).process(css).css;
 
     };
     

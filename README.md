@@ -8,7 +8,7 @@
 
 安装
 ```
-npm install edp-provider-rider
+npm install edp-provider-rider --save
 ```
 
 配置
@@ -18,6 +18,11 @@ npm install edp-provider-rider
 ```javascript
 var epr = require( 'edp-provider-rider' );
 exports.stylus = epr.stylus;
+
+// 默认配置
+var stylusPlugin = epr.plugin();
+
+// 扩展配置 
 var stylusPlugin = epr.plugin({
     implicit: true,                                             //引入rider
     autoprefixer: [ "android >= 2.3", "ios >= 5", "ie >= 10" ], //autoprefixer支持
@@ -38,7 +43,6 @@ autocss({
         use: stylusPlugin
     }
 })
-
 ```
 
 

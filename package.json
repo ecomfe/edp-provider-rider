@@ -1,7 +1,7 @@
 {
     "name": "edp-provider-rider",
     "description": "edp Rider 处理器",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "contributors": [
         { "name": "junmer", "email": "junmer@foxmail.com"}
     ],
@@ -10,6 +10,9 @@
         "stylus": "~0.42.2",
         "rider": "~0.1.1",
         "autoprefixer": "~1.1"
+    },
+    "devDependencies": {
+        "edp": ">=0.6.20"
     },
     "main": "index.js",
     "repository": "git://github.com/ecomfe/edp-provider-rider"
