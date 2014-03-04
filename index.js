@@ -43,12 +43,13 @@ function plugin(options, callback) {
 
     return function (style) {
 
+        style.set('resolve url', options.resolveUrl || true);
+
         style.use(
             rider({
                 implicit: options.implicit
             })
-        )
-        .set('resolve url', options.resolveUrl || true);
+        );
 
         if (options.autoprefixer !== false) {
             style.on('end', prefixer(options.autoprefixer, callback));
