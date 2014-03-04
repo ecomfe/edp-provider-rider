@@ -1,19 +1,17 @@
-# edp-provider-rider
+edp-provider-rider [![NPM version](https://badge.fury.io/js/edp-provider-rider.png)](https://npmjs.org/package/edp-provider-rider) [![DevDependencies Status](https://david-dm.org/ecomfe/edp-provider-rider.png)](https://david-dm.org/ecomfe/edp-provider-rider)
+===
 
-[saber/issues#11](https://github.com/ecomfe/saber/issues/11)
+[`edp`](https://github.com/ecomfe/edp) 的 [`rider`](https://github.com/ecomfe/rider) 支持模块，为 `webserver` 和 `build` 命令提供了预定配置，并保证项目依赖的 `stylus`、`rider`、`autoprefixer` 版本正确。
 
-保证项目依赖的 `stylus`、`rider`、`autoprefixer` 版本正确
+## 安装
 
-## Start
-
-安装
-```
+```bash
 npm install edp-provider-rider --save
 ```
 
-配置
+## 配置
 
-`edp-webserver-config.js`, `edp-build-config.js`
+在 `edp-webserver-config.js` 与 `edp-build-config.js` 顶部引入：
 
 ```javascript
 var epr = require( 'edp-provider-rider' );
@@ -21,22 +19,32 @@ exports.stylus = epr.stylus;
 
 // 默认配置
 var stylusPlugin = epr.plugin();
+```
 
-// 扩展配置 
+配置也可以根据需要扩展：
+
+```javascript
+// 扩展配置，参数都是可选的
 var stylusPlugin = epr.plugin({
-    implicit: true,                                             //引入rider
-    autoprefixer: [ "android >= 2.3", "ios >= 5", "ie >= 10" ], //autoprefixer支持
-    use: funcion(){}                                            //stylus use扩展
+
+    // 隐式引入 rider，默认为 true
+    implicit: true,
+
+    // 是否解析 url 中的路径，默认为 true
+    resolveUrl: true,
+
+    // autoprefixer 配置，以下为默认值，可设置 false 禁用
+    autoprefixer: [ "android >= 2.3", "ios >= 5", "ie >= 10" ],
+
+    // 手动追加 stylus 配置，可在此处引入 stylus 插件
+    // 参考：http://learnboost.github.io/stylus/docs/js.html#usefn
+    use: funcion(style){}
 });
+```
 
-// build
-new StylusCompiler({
-    compileOptions: {
-        use: stylusPlugin
-    }
-})
+在 `edp-webserver-config.js` 对应部分添加：
 
-// webserver
+```javascript
 autocss({
     stylus: {
         stylus: epr.stylus,
@@ -45,6 +53,13 @@ autocss({
 })
 ```
 
+在 `edp-build-config.js` 对应部分添加：
 
-
-
+```javascript
+new StylusCompiler({
+    stylus: epr.stylus,
+    compileOptions: {
+        use: stylusPlugin
+    }
+})
+```
