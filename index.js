@@ -8,7 +8,7 @@ var ap = require('autoprefixer');
 
 /**
  * autoprefixer 
- * @param  {array}   args      autoprefixer options
+ * @param  {Array}   args      autoprefixer options
  * @param  {Function} callback provider callback
  * @return {Function}          autoprefixer function
  */
@@ -28,21 +28,26 @@ function prefixer(args, callback) {
 
 /**
  * 编译
- * @param  {Object}   options  options
- * @param  {Function} callback provider callback
+ * @param  {Object}     options  options
+ * @param  {boolean=}   options.implicit  引入rider
+ * @param  {Array=}     options.autoprefixer  autoprefixer支持
+ * @param  {Function=}  options.use  use
+ * @param  {Function=}  callback provider callback
  */
-function plugin(options) { 
+function plugin(options, callback) { 
 
     return function (stylus) {
 
-        stylus.use(rider({
-            implicit: options.implicit
-        }))
+        stylus.use(
+            rider({
+                implicit: options.implicit
+            })
+        )
         .on('end', prefixer(options.autoprefixer, callback));
 
-        if (options.plugin) {
+        if (options.use) {
 
-            stylus.use(plugin);
+            stylus.use(options.use);
 
         }
 
@@ -54,5 +59,5 @@ module.exports = exports = {
     stylus: stylus,
     rider: rider,
     autoprefixer: ap,
-    provider: plugin
+    plugin: plugin
 };
