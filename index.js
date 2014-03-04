@@ -40,6 +40,7 @@ function prefixer(args, callback) {
  * @param  {Function=}  callback provider callback
  */
 function plugin(options, callback) { 
+    options = options || {};
 
     return function (style) {
 
