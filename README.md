@@ -1,4 +1,4 @@
-edp-provider-rider [![NPM version](https://badge.fury.io/js/edp-provider-rider.png)](https://npmjs.org/package/edp-provider-rider) [![DevDependencies Status](https://david-dm.org/ecomfe/edp-provider-rider.png)](https://david-dm.org/ecomfe/edp-provider-rider)
+edp-provider-rider [![NPM version](https://badge.fury.io/js/edp-provider-rider.png)](https://npmjs.org/package/edp-provider-rider) [![Dependencies Status](https://david-dm.org/ecomfe/edp-provider-rider.png)](https://david-dm.org/ecomfe/edp-provider-rider)
 ===
 
 [`edp`](https://github.com/ecomfe/edp) 的 [`rider`](https://github.com/ecomfe/rider) 支持模块，为 `webserver` 和 `build` 命令提供了预定配置，并保证项目依赖的 `stylus`、`rider`、`autoprefixer` 版本正确。
