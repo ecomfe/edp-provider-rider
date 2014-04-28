@@ -1,14 +1,14 @@
 {
     "name": "edp-provider-rider",
     "description": "edp 的 rider 支持模块，为 webserver 和 build 命令提供了预定配置。",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "contributors": [
         { "name": "junmer", "email": "junmer@foxmail.com" },
         { "name": "Firede", "email": "firede@firede.us" }
     ],
     "dependencies": {
-        "stylus": "~0.43.1",
-        "rider": "~0.3.2",
+        "stylus": "~0.44.0",
+        "rider": "~0.3.3",
         "autoprefixer": "~1.1.20140410"
     },
     "main": "index.js",
