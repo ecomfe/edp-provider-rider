@@ -1,7 +1,7 @@
 {
     "name": "edp-provider-rider",
     "description": "edp 的 rider 支持模块，为 webserver 和 build 命令提供了预定配置。",
-    "version": "0.3.3",
+    "version": "0.3.4",
     "contributors": [
         { "name": "junmer", "email": "junmer@foxmail.com" },
         { "name": "Firede", "email": "firede@firede.us" }
