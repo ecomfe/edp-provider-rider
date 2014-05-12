@@ -37,6 +37,7 @@ var stylusPlugin = epr.plugin({
     autoprefixer: [ "android >= 2.3", "ios >= 5", "ie >= 10" ],
 
     // husl 配置，默认为 false
+    // 参考：http://www.boronine.com/husl/
     husl: true,
 
     // 手动追加 stylus 配置，可在此处引入 stylus 插件
