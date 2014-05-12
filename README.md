@@ -36,6 +36,10 @@ var stylusPlugin = epr.plugin({
     // autoprefixer 配置，以下为默认值，可设置 false 禁用
     autoprefixer: [ "android >= 2.3", "ios >= 5", "ie >= 10" ],
 
+    // husl 配置，默认为 false
+    // 参考：http://www.boronine.com/husl/
+    husl: true,
+
     // 手动追加 stylus 配置，可在此处引入 stylus 插件
     // 参考：http://learnboost.github.io/stylus/docs/js.html#usefn
     use: funcion(style){}
