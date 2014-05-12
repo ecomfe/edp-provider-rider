@@ -7,6 +7,7 @@
 var stylus = require('stylus');
 var rider = require('rider');
 var ap = require('autoprefixer');
+var husl = require('husl');
 
 /**
  * autoprefixer
@@ -36,6 +37,7 @@ function prefixer(args, callback) {
  * @param  {Object}     options  options
  * @param  {boolean=}   options.implicit  引入rider
  * @param  {Array|boolean=}     options.autoprefixer  autoprefixer支持
+ * @param  {boolean=}   options.husl husl支持
  * @param  {boolean=}   options.resolveUrl resolve url
  * @param  {Function=}  options.use  use
  * @param  {Function=}  callback provider callback
@@ -57,6 +59,10 @@ function plugin(options, callback) {
             style.on('end', prefixer(options.autoprefixer, callback));
         }
 
+        if (options.husl) {
+            style.use(husl());
+        }
+
         if (options.use) {
             style.use(options.use);
         }
@@ -67,5 +73,6 @@ module.exports = exports = {
     stylus: stylus,
     rider: rider,
     autoprefixer: ap,
+    husl: husl,
     plugin: plugin
 };
