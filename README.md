@@ -34,7 +34,7 @@ var stylusPlugin = epr.plugin({
     resolveUrl: true,
 
     // autoprefixer 配置，以下为默认值，可设置 false 禁用
-    autoprefixer: [ "android >= 2.3", "ios >= 5", "ie >= 10" ],
+    autoprefixer: [ "android >= 2.3", "ios >= 6", "ie >= 10" ],
 
     // husl 配置，默认为 false
     // 参考：http://www.boronine.com/husl/
