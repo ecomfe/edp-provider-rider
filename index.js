@@ -26,7 +26,7 @@ function prefixer(args, callback) {
 
         return ap.apply(
             this, 
-            args || [ 'android >= 2.3', 'ios >= 5', 'ie >= 10' ]
+            args || [ 'android >= 2.3', 'ios >= 6', 'ie >= 10' ]
             ).process(css).css;
     };
 }
