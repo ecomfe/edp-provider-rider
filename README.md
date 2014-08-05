@@ -14,7 +14,7 @@ npm install edp-provider-rider --save
 在 `edp-webserver-config.js` 与 `edp-build-config.js` 顶部引入：
 
 ```javascript
-var epr = require( 'edp-provider-rider' );
+var epr = require('edp-provider-rider');
 exports.stylus = epr.stylus;
 
 // 默认配置
@@ -34,7 +34,7 @@ var stylusPlugin = epr.plugin({
     resolveUrl: true,
 
     // autoprefixer 配置，以下为默认值，可设置 false 禁用
-    autoprefixer: [ "android >= 2.3", "ios >= 6", "ie >= 10" ],
+    autoprefixer: [ 'Android >= 2.3', 'iOS >= 5', 'ExplorerMobile >= 10' ],
 
     // husl 配置，默认为 false
     // 参考：http://www.boronine.com/husl/
@@ -42,7 +42,7 @@ var stylusPlugin = epr.plugin({
 
     // 手动追加 stylus 配置，可在此处引入 stylus 插件
     // 参考：http://learnboost.github.io/stylus/docs/js.html#usefn
-    use: funcion(style){}
+    use: funcion(style) {}
 });
 ```
 
