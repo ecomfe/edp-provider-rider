@@ -47,7 +47,9 @@ function plugin(options, callback) {
 
     return function (style) {
 
-        style.set('resolve url', options.resolveUrl || true);
+        if (options.resolveUrl !== false) {
+            style.define('url', stylus.resolver());
+        }
 
         style.use(
             rider({
