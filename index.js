@@ -6,7 +6,7 @@
 
 var stylus = require('stylus');
 var rider = require('rider');
-var ap = require('autoprefixer');
+var ap = require('autoprefixer-core');
 var husl = require('husl');
 
 /**
@@ -26,7 +26,9 @@ function prefixer(args, callback) {
 
         return ap.apply(
                 this,
-                args || ['Android >= 2.3', 'iOS >= 5', 'ExplorerMobile >= 10']
+                {
+                    browsers: args || ['Android >= 2.3', 'iOS >= 5', 'ExplorerMobile >= 10']
+                }
             ).process(css).css;
     };
 }
@@ -62,7 +64,17 @@ function plugin(options, callback) {
         }
 
         if (options.husl) {
-            style.use(husl());
+            // define husl & huslp
+            style.define('husl', function (H, S, L, A) {
+                var rgb = husl._rgbPrepare(husl._conv.husl.rgb([H.val, S.val, L.val]));
+                var a = (A !== undefined ? A.val : 1);
+                return new stylus.nodes.RGBA(rgb[0], rgb[1], rgb[2], a);
+            });
+            style.define('huslp', function (H, S, L, A) {
+                var rgb = husl._rgbPrepare(husl._conv.huslp.rgb([H.val, S.val, L.val]));
+                var a = (A !== undefined ? A.val : 1);
+                return new stylus.nodes.RGBA(rgb[0], rgb[1], rgb[2], a);
+            });
         }
 
         if (options.use) {
