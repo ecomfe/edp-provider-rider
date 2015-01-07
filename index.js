@@ -11,7 +11,7 @@ var husl = require('husl');
 
 /**
  * autoprefixer
- * 
+ *
  * @param  {Array}   args      autoprefixer options
  * @param  {Function} callback provider callback
  * @return {Function}          autoprefixer function
@@ -24,7 +24,7 @@ function prefixer(args, callback) {
             callback(err);
         }
 
-        return ap.apply(
+        return ap.call(
                 this,
                 {
                     browsers: args || ['Android >= 2.3', 'iOS >= 5', 'ExplorerMobile >= 10']
@@ -35,7 +35,7 @@ function prefixer(args, callback) {
 
 /**
  * 编译
- * 
+ *
  * @param  {Object}     options  options
  * @param  {boolean=}   options.implicit  引入rider
  * @param  {Array|boolean=}     options.autoprefixer  autoprefixer支持
@@ -44,7 +44,7 @@ function prefixer(args, callback) {
  * @param  {Function=}  options.use  use
  * @param  {Function=}  callback provider callback
  */
-function plugin(options, callback) { 
+function plugin(options, callback) {
     options = options || {};
 
     return function (style) {
