@@ -14,3 +14,32 @@
  */
 .c
     fixed: _ 0 30px
+
+/**
+ * Media Query 合并
+ */
+
+.foo::before
+    content: "foo on small"
+
+@media screen and (min-width: 769px)
+    .foo::before
+        content: "foo on medium"
+
+.bar::before
+    content: "bar on small"
+
+@media screen and (min-width: 769px)
+    .bar::before
+        content: "bar on medium"
+
+/**
+ * HUSL 测试
+ */
+tile($hue)
+    background-color husl($hue, 90%, 80%)
+    color husl($hue + 190deg, 90%, 10%)
+
+for $hue in 0deg 30deg 60deg 90deg 120deg 150deg
+    .colored-tile-{$hue}
+        tile($hue)

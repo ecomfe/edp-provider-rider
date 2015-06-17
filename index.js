@@ -6,43 +6,59 @@
 
 var stylus = require('stylus');
 var rider = require('rider');
+var postcss = require('postcss');
+var mqpacker = require('css-mqpacker');
 var ap = require('autoprefixer-core');
 var husl = require('husl');
 
 /**
- * autoprefixer
+ * 后处理器
  *
- * @param  {Array}   args      autoprefixer options
- * @param  {Function} callback provider callback
- * @return {Function}          autoprefixer function
+ * @param  {Object} options 选项
+ * @param  {Array|boolean=} options.autoprefixer Autoprefixer支持
+ * @param  {boolean=} options.mqpacker mqpacker启用状态
+ * @param  {Function} callback callback
+ * @return {Function} autoprefixer function
  */
-function prefixer(args, callback) {
+function postprocessor(options, callback) {
+
+    var defaultBrowsers = ['Android >= 2.3', 'iOS >= 6', 'ExplorerMobile >= 10'];
 
     return function (err, css) {
-
         if (err) {
             callback(err);
         }
 
-        return ap.call(
-                this,
-                {
-                    browsers: args || ['Android >= 2.3', 'iOS >= 5', 'ExplorerMobile >= 10']
-                }
-            ).process(css).css;
+        var processors = [];
+
+        if (options.autoprefixer !== false) {
+            processors.push(
+                ap({browsers: options.autoprefixer || defaultBrowsers})
+            );
+        }
+
+        if (options.mqpacker !== false) {
+            processors.push(mqpacker);
+        }
+
+        if (processors.length > 0) {
+            return postcss(processors).process(css).css;
+        }
+
+        return css;
     };
 }
 
 /**
  * 编译
  *
- * @param  {Object}     options  options
- * @param  {boolean=}   options.implicit  引入rider
- * @param  {Array|boolean=}     options.autoprefixer  autoprefixer支持
- * @param  {boolean=}   options.husl husl支持
- * @param  {boolean=}   options.resolveUrl resolve url
- * @param  {Function=}  options.use  use
- * @param  {Function=}  callback provider callback
+ * @param  {Object} options options
+ * @param  {boolean=} options.implicit 引入rider
+ * @param  {Array|boolean=} options.autoprefixer autoprefixer支持
+ * @param  {boolean=} options.husl husl支持
+ * @param  {boolean=} options.resolveUrl resolve url
+ * @param  {Function=} options.use use
+ * @param  {Function=} callback provider callback
  */
 function plugin(options, callback) {
     options = options || {};
@@ -59,9 +75,7 @@ function plugin(options, callback) {
             })
         );
 
-        if (options.autoprefixer !== false) {
-            style.on('end', prefixer(options.autoprefixer, callback));
-        }
+        style.on('end', postprocessor(options, callback));
 
         if (options.husl) {
             // define husl & huslp
@@ -88,5 +102,7 @@ module.exports = exports = {
     rider: rider,
     autoprefixer: ap,
     husl: husl,
-    plugin: plugin
+    plugin: plugin,
+    postcss: postcss,
+    mqpacker: mqpacker
 };
