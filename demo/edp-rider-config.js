@@ -21,7 +21,11 @@ epr.stylusPlugin = epr.plugin({
 
     // husl 插件，需要时启用
     // @see: http://www.boronine.com/husl/
-    // husl: true,
+    husl: true,
+
+    // mqpacker，默认启用
+    // @see: https://github.com/hail2u/node-css-mqpacker
+    // mqpacker: false,
 
     // autoprefixer 配置
     // @see: https://github.com/postcss/autoprefixer-core#usage
